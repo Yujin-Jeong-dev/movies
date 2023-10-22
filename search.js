@@ -1,3 +1,4 @@
+const header = document.querySelector('.header');
 const form = document.querySelector('.search');
 const searchInput = document.querySelector('#search__input');
 const searchBtn = document.querySelector('.search__btn');
@@ -9,18 +10,23 @@ function onSubmit(e) {
     if (searchInput.value.trim() !== '') filterMovieCard();
 }
 
-
-
 function showMovieCard(movies) {
     movies.map(movie => {
         const movieCard = addMovieCard(movie);
         movieLists.appendChild(movieCard);
         movieCard.addEventListener('click', () => {
-            alert(`영화 id : ${movie.id}`);
+            //alert(`영화 id : ${movie.id}`);
+            const id = movie.id;
+            //id가 있으면 값을 찾아서 해당 id를 저장
+            console.log(id);
+            id && localStorage.setItem('id', JSON.stringify(id));
+            window.location.href = 'movieDetail.html';
         })
     });
 
 }
+
+
 
 function filterMovieCard() {
     //input에서 입력한 값을 가져오고 소문자로 모두 변환함. 
@@ -34,7 +40,7 @@ function filterMovieCard() {
 
 //해당 영역에만 무비 카드를 만듬. 전체면 전체고, 필터링이면 필터링만 만들기 
 function addMovieCard(movie) {
-    let { id, title, overview, poster_path, vote_average } = movie;
+    let { id, title, poster_path } = movie;
     poster_path = `https://image.tmdb.org/t/p/original/${poster_path}`;
     const card = document.createElement('div');
     card.setAttribute('id', id);
@@ -47,17 +53,8 @@ function addMovieCard(movie) {
     const poster = document.createElement('img');
     poster.setAttribute('src', poster_path);
 
-    const content = document.createElement('p');
-    content.setAttribute('class', 'content')
-    content.textContent = overview;
-
-    const score = document.createElement('p');
-    score.textContent = `평점 : ${vote_average}`;
-
     card.appendChild(cardTitle);
     card.appendChild(poster);
-    card.appendChild(content);
-    card.appendChild(score);
 
     return card;
 }
@@ -76,24 +73,21 @@ async function getMovies() {
     await axios.get(url, options)
         .then(res => {
             movies = res.data.results;
+            if (movies.length > 0) saveMovies();
             showMovieCard(movies);
         })
         .catch(console.err);
 
+}
 
-
-    // fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-    //     .then(res => { return res.json() })
-    //     .then(data => {
-    //         const movies = data.results;
-    //         //영화들 데이터를 가져와 영화 카드를 보여줌. 
-    //         showMovieCard(movies);
-    //     })
-    //     .catch(err => console.error(err));
-
+function saveMovies() {
+    localStorage.setItem('movies', JSON.stringify(movies));
 }
 
 
 
+//header.addEventListener('click', () => window.location.reload())
 form.addEventListener('submit', onSubmit);
-window.addEventListener('load', getMovies)
+window.addEventListener('load', getMovies);
+
+

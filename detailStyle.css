@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    background-color: #fefae0;
+    text-align: center;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    border-radius: 25px;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    background-color: #faedcd;
+    padding: 20px 0;
+}
+
+.movie {
+    width: 500px;
+    height: 670px;
+    margin: auto;
+}
+
+.movie__detail {
+    width: 100%;
+    height: 100%;
+    background-color: #d4a373;
+    color: whitesmoke;
+    margin: auto;
+    border-radius: 25px;
+}
+
+.title {
+    padding: 20px 30px;
+    margin-bottom: 0;
+    font-size: 25px;
+}
+
+.content {
+    font-size: 20px;
+    margin: 20px 30px;
+}
+
+.score {
+    font-size: 15px;
+}
