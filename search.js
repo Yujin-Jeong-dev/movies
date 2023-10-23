@@ -34,7 +34,6 @@ function filterMovieCard() {
     })
 }
 
-//해당 영역에만 무비 카드를 만듬. 전체면 전체고, 필터링이면 필터링만 만들기 
 function addMovieCard(movie) {
     let { id, title, poster_path } = movie;
     poster_path = `https://image.tmdb.org/t/p/original/${poster_path}`;
@@ -64,7 +63,7 @@ async function getMovies() {
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODRhYTdhYzI0YzA4MDQ5NTliZTYwMWQ1NGNiNTVmNSIsInN1YiI6IjY1MzA3NDg4OWQ1OTJjMDBlY2NhNDIxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pzeR-WgSZE9rH2RlMjPFsuTfxUsjdYUGJY41msWPjyE'
         }
     };
-    const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-us&page=1;
+    const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-us&page=1';
 
     await axios.get(url, options)
         .then(res => {
