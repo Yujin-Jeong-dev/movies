@@ -29,6 +29,6 @@ function getDetail() {
     movieDetail.appendChild(score);
 }
 
-header.addEventListener('click', () => window.location.replace('main.html'));
+header.addEventListener('click', () => window.location.replace('index.html'));
 movie.addEventListener('click', () => alert(`영화 id: ${id}`));
 window.addEventListener('load', getDetail);
