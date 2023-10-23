@@ -1,3 +1,4 @@
+import config from './key.js';
 const header = document.querySelector('.header');
 const form = document.querySelector('.search');
 const searchInput = document.querySelector('#search__input');
