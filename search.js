@@ -1,4 +1,3 @@
-import config from './key.js';
 const header = document.querySelector('.header');
 const form = document.querySelector('.search');
 const searchInput = document.querySelector('#search__input');
@@ -16,9 +15,7 @@ function showMovieCard(movies) {
         const movieCard = addMovieCard(movie);
         movieLists.appendChild(movieCard);
         movieCard.addEventListener('click', () => {
-            //alert(`영화 id : ${movie.id}`);
             const id = movie.id;
-            //id가 있으면 값을 찾아서 해당 id를 저장
             console.log(id);
             id && localStorage.setItem('id', JSON.stringify(id));
             window.location.href = 'movieDetail.html';
@@ -30,9 +27,7 @@ function showMovieCard(movies) {
 
 
 function filterMovieCard() {
-    //input에서 입력한 값을 가져오고 소문자로 모두 변환함. 
     const keyword = searchInput.value.toLowerCase();
-    //영화 데이터들 중에서 제목이 해당 키워드를 포함한 영화만 보여주고 그렇지 않으면 숨기기
     movies.map((movie) => {
         if (!movie.title.toLowerCase().includes(keyword)) document.getElementById(`${movie.id}`).style.display = 'none';
         else document.getElementById(`${movie.id}`).style.display = 'block';
@@ -66,10 +61,10 @@ async function getMovies() {
     const options = {
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${config.key}`
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODRhYTdhYzI0YzA4MDQ5NTliZTYwMWQ1NGNiNTVmNSIsInN1YiI6IjY1MzA3NDg4OWQ1OTJjMDBlY2NhNDIxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pzeR-WgSZE9rH2RlMjPFsuTfxUsjdYUGJY41msWPjyE'
         }
     };
-    const url = config.url;
+    const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-us&page=1;
 
     await axios.get(url, options)
         .then(res => {
